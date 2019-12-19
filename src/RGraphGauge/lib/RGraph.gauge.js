@@ -120,7 +120,7 @@ RGraph.Gauge = function (conf) {
         'chart.border.gradient': false,
         'chart.adjustable': false,
         'chart.shadow': true,
-        'chart.shadow.color': 'gray',
+        'chart.shadow.color': 'white',
         'chart.shadow.offsetx': 0,
         'chart.shadow.offsety': 0,
         'chart.shadow.blur': 15,
