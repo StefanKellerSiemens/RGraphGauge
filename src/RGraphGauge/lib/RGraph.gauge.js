@@ -104,15 +104,15 @@ RGraph.Gauge = function (conf) {
         'chart.centerpin.radius': null,
         'chart.zoom.background': true,
         'chart.zoom.action': 'zoom',
-        'chart.tickmarks.small': 25,
+        'chart.tickmarks.small': 30,
         'chart.tickmarks.small.color': 'black',
         'chart.tickmarks.medium': 0,
         'chart.tickmarks.medium.color': 'black',
-        'chart.tickmarks.big': 5,
+        'chart.tickmarks.big': 6,
         'chart.tickmarks.big.color': 'black',
-        'chart.labels.count': 5,
-        'chart.labels.centered': false,
-        'chart.labels.offset.radius': 0,
+        'chart.labels.count': 6,
+        'chart.labels.centered': true,
+        'chart.labels.offset.radius': 15,
         'chart.labels.offset.angle': 0,
         'chart.labels.specific': null,
         'chart.labels.offsetx': 0,
@@ -317,8 +317,8 @@ RGraph.Gauge = function (conf) {
             co.beginPath();
             co.strokeStyle = prop['chart.tickmarks.big.color'];
             var a = (((this.endAngle - this.startAngle) / numTicks) * i) + this.startAngle;
-            co.arc(this.centerx, this.centery, this.radius - prop['chart.border.width'] - 10, a, a + 0.00001, 0);
-            co.arc(this.centerx, this.centery, this.radius - prop['chart.border.width'] - 10 - 10, a, a + 0.00001, 0);
+            co.arc(this.centerx, this.centery, this.radius - prop['chart.border.width'] - 10, a, a + 0.00002, 0);
+            co.arc(this.centerx, this.centery, this.radius - prop['chart.border.width'] - 10 - 10, a, a + 0.00002, 0);
             co.stroke();
         }
     };
@@ -445,7 +445,7 @@ RGraph.Gauge = function (conf) {
     this.drawNeedle = this.DrawNeedle = function (value, color, index) {
         var type = prop['chart.needle.type'];
         co.lineWidth = 0.5;
-        co.strokeStyle = 'gray';
+        co.strokeStyle = 'yellow';
         co.fillStyle = color;
         var angle = (this.endAngle - this.startAngle) * ((value - this.min) / (this.max - this.min));
         angle += this.startAngle;
@@ -549,7 +549,7 @@ RGraph.Gauge = function (conf) {
         if (prop['chart.border.gradient']) {
             co.beginPath();
             var grad = co.createRadialGradient(this.centerx, this.centery, this.radius, this.centerx, this.centery, this.radius - 15);
-            grad.addColorStop(0, 'gray');
+            grad.addColorStop(0, 'pink');
             grad.addColorStop(1, 'white');
             co.fillStyle = grad;
             co.arc(this.centerx, this.centery, this.radius, 0, RG.TWOPI, false)
