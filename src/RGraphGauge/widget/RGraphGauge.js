@@ -92,6 +92,10 @@ define([
 
 			// when resize is triggered (also after postCreate) size the canvas
 			if(this._gauge){
+				var canvas = document.getElementById(this.cvs.id);
+				if (canvas) {
+					RGraph.reset(canvas);
+				}
 				RGraph.redraw();
 				//console.log(this._logNode + 'resizing to width, height: ' + this.size + "px, " + this.size + 'px.');
 			}
