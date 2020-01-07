@@ -77,24 +77,50 @@ define([
         postCreate: function() {
             logger.debug(this.id + ".postCreate");
 
-			this.domNode.width = this.size;	
 			
 			// set dimensions based on widget settings
-			this.cvs.width = this.size;
-			this.cvs.height = this.size * (2/3) + this._titleSpace;
+			this.setDimensions();
+			// this.domNode.width = this.size;	
+			// this.cvs.width = this.size;
+			// this.cvs.height = this.size * (2/3) + this._titleSpace;
 			
 			// update canvas id to make multiple graphs on one Mendix page possible. id is targeted later on whilst creating the graph
 			this.cvs.id = "cvs_" + this.domNode.id;
 						
         },
 
+		setDimensions: function () {
+			if (this.domNode) {
+				if (!this.parent) {
+					this.parent = this.domNode.parentNode;
+				}
+
+				// set width
+				if (this.widthUnit === "percentage") {
+					this.size = (this.parent && this.parent.clientWidth) ? this.parent.clientWidth / 100 * this.width : 150;
+				} else {
+					this.size = this.width;
+				}
+				this.domNode.width = this.size;
+
+				// set canvas sizes
+				this.cvs.width = this.domNode.width;
+				this.cvs.height = this.domNode.width * (2/3) + this._titleSpace;
+			}
+		},
+		
 		resize: function(){
 
 			// when resize is triggered (also after postCreate) size the canvas
 			if(this._gauge){
 				var canvas = document.getElementById(this.cvs.id);
+				
 				if (canvas) {
+					// set dimensions based on widget settings
+					this.setDimensions();
+
 					RGraph.reset(canvas);
+					this._updateRendering();
 				}
 				RGraph.redraw();
 				//console.log(this._logNode + 'resizing to width, height: ' + this.size + "px, " + this.size + 'px.');
@@ -117,7 +143,7 @@ define([
 
         },
         _drawChart: function() {
-
+			
 			// Widget configured variables
 			var value = this._contextObj ? Number(this._contextObj.get(this.valueAttr)) : 0;
 			var minValue = this._contextObj ? Number(this._contextObj.get(this.minValueAttr)) : 0;

@@ -38,10 +38,19 @@
             <category>General</category>
             <description>The title that will be displayed inside the arch.</description>
         </property>
-		<property key="size" type="integer" required="true" defaultValue="250">
-            <caption>Size</caption>
+        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+            <caption>Width unit</caption>
             <category>General</category>
-            <description>The size of the gauge in pixels. Be aware that when using layoutgrids, the gauge size can't exceed the layoutgrid column size. If so, corners will be cut off from the gauge. If semicircular gauge is chosen, the height will be 2/3 of size.</description>
+            <description></description>
+            <enumerationValues>
+                <enumerationValue key="percentage">Percentage</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="width" type="integer" required="true" defaultValue="100">
+            <caption>Width</caption>
+            <category>General</category>
+            <description>The width of the gauge in pixels. Be aware that when using layoutgrids, the gauge width can't exceed the layoutgrid column width. If so, corners will be cut off from the gauge. If semicircular gauge is chosen, the height will be 2/3 of width, otherwise it will be the same value.</description>
         </property>
 		<property key="textColor" type="string" required="false" defaultValue="#816c6a">
             <caption>Text Color</caption>
